@@ -1,666 +1,597 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090909">
-  <meta name="description" content="أثر شات - تواصل يترك أثرًا">
-  <title>أثر شات | ATHAR CHAT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>أثر شات | ATHAR CHAT</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --gold: #d7b56d;
-      --gold-light: #f4dfa4;
-      --black: #090909;
-      --panel: #111111;
-      --muted: #929292;
-      --border: #302719;
-    }
+<style>
+:root {
+  --gold: #d7b56d;
+  --light: #f4dfa4;
+  --black: #090909;
+  --border: #302719;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse at 50% 0%, #382b142c, transparent 55%),
-        var(--black);
-      color: #fff;
-      font-family: "Tajawal", sans-serif;
-      display: flex;
-      flex-direction: column;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, #382b1430, transparent 55%),
+    var(--black);
+  color: white;
+  font-family: "Tajawal", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 
-    header {
-      padding: 22px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid #ffffff0d;
-    }
+header {
+  padding: 22px;
+  border-bottom: 1px solid #ffffff12;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
 
-    .brand {
-      font-size: 25px;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
+.brand {
+  color: var(--light);
+  font-size: 25px;
+  font-weight: 800;
+}
 
-    .brand small {
-      display: block;
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: #a99468;
-      direction: ltr;
-      text-align: right;
-    }
+.brand small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  direction: ltr;
+}
 
-    .status {
-      font-size: 12px;
-      color: var(--muted);
-    }
+.status {
+  color: #999;
+  font-size: 12px;
+}
 
-    main {
-      flex: 1;
-      width: min(100% - 30px, 440px);
-      margin: 40px auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+main {
+  width: min(440px, calc(100% - 30px));
+  margin: auto;
+  padding: 35px 0;
+}
 
-    .intro {
-      text-align: center;
-      margin-bottom: 28px;
-    }
+.intro {
+  text-align: center;
+  margin-bottom: 28px;
+}
 
-    .logo {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 18px;
-      border: 1px solid var(--gold);
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
-      color: var(--gold-light);
-      font-size: 38px;
-      box-shadow: 0 0 45px #d7b56d12;
-      transform: rotate(-3deg);
-    }
+.logo {
+  width: 75px;
+  height: 75px;
+  border: 1px solid var(--gold);
+  border-radius: 23px;
+  display: grid;
+  place-items: center;
+  margin: auto auto 18px;
+  font-size: 38px;
+  color: var(--light);
+  box-shadow: 0 0 35px #d7b56d15;
+}
 
-    h1 {
-      font-size: 34px;
-      margin: 0 0 8px;
-      color: var(--gold-light);
-    }
+h1 {
+  color: var(--light);
+  font-size: 32px;
+  margin: 0 0 10px;
+}
 
-    .subtitle {
-      color: var(--muted);
-      margin: 0;
-      font-size: 15px;
-    }
+.subtitle {
+  color: #999;
+  font-size: 15px;
+}
 
-    .card {
-      background: linear-gradient(145deg, #151515, #0e0e0e);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 25px 22px;
-      box-shadow: 0 20px 70px #0008;
-    }
+.card {
+  background: linear-gradient(145deg, #151515, #0d0d0d);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 60px #0008;
+}
 
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding: 5px;
-      background: #080808;
-      border-radius: 12px;
-      margin-bottom: 25px;
-    }
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 5px;
+  background: #080808;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
 
-    .tab {
-      border: 0;
-      border-radius: 9px;
-      padding: 12px 5px;
-      background: transparent;
-      color: #999;
-      font-family: inherit;
-      font-size: 15px;
-      cursor: pointer;
-    }
+.tab {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 5px;
+  background: transparent;
+  color: #999;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
 
-    .tab.active {
-      background: linear-gradient(135deg, #f0d99b, #b28b43);
-      color: #15110a;
-      font-weight: 800;
-    }
+.tab.active {
+  background: linear-gradient(110deg, #f0d99b, #b28b43);
+  color: #171209;
+  font-weight: 800;
+}
 
-    label {
-      display: block;
-      margin: 17px 0 8px;
-      color: #ddd1b6;
-      font-size: 14px;
-    }
+label {
+  display: block;
+  margin: 17px 0 8px;
+  color: #ddd1b6;
+  font-size: 14px;
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 11px;
-      border: 1px solid #34302a;
-      background: #090909;
-      color: white;
-      outline: none;
-      font-family: inherit;
-      font-size: 15px;
-    }
+input {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 11px;
+  border: 1px solid #34302a;
+  background: #090909;
+  color: white;
+  outline: none;
+  font-family: inherit;
+  font-size: 15px;
+}
 
-    input:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px #d7b56d12;
-    }
+input:focus {
+  border-color: var(--gold);
+}
 
-    input::placeholder {
-      color: #626262;
-    }
+input::placeholder {
+  color: #626262;
+}
 
-    .forgot {
-      display: block;
-      margin-top: 12px;
-      color: var(--gold);
-      font-size: 13px;
-      text-align: left;
-      text-decoration: none;
-      cursor: pointer;
-    }
+.forgot {
+  display: block;
+  margin-top: 13px;
+  text-align: left;
+  color: var(--gold);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-    .primary {
-      width: 100%;
-      margin-top: 23px;
-      padding: 15px;
-      border: 0;
-      border-radius: 11px;
-      background: linear-gradient(110deg, #f0d99b, #b28b43);
-      color: #171209;
-      font-family: inherit;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: .2s;
-    }
+.primary {
+  width: 100%;
+  margin-top: 23px;
+  padding: 15px;
+  border: 0;
+  border-radius: 11px;
+  background: linear-gradient(110deg, #f0d99b, #b28b43);
+  color: #171209;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
 
-    .primary:disabled {
-      opacity: .55;
-      cursor: wait;
-    }
+.primary:disabled {
+  opacity: .6;
+}
 
-    .message {
-      display: none;
-      padding: 12px;
-      margin-top: 17px;
-      border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.8;
-      overflow-wrap: anywhere;
-    }
+.message {
+  display: none;
+  margin-top: 17px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
 
-    .message.show {
-      display: block;
-    }
+.message.show {
+  display: block;
+}
 
-    .message.info {
-      background: #d7b56d14;
-      color: var(--gold-light);
-      border: 1px solid #d7b56d30;
-    }
+.info {
+  color: var(--light);
+  background: #d7b56d14;
+}
 
-    .message.error {
-      background: #ff454510;
-      color: #ffaaaa;
-      border: 1px solid #ff454530;
-    }
+.error {
+  color: #ffaaaa;
+  background: #ff454515;
+}
 
-    .message.success {
-      background: #39cf8510;
-      color: #8ce7b5;
-      border: 1px solid #39cf8530;
-    }
+.success {
+  color: #8ce7b5;
+  background: #39cf8515;
+}
 
-    .terms {
-      color: #777;
-      font-size: 12px;
-      line-height: 1.8;
-      text-align: center;
-      margin: 20px 0 0;
-    }
+.terms {
+  color: #777;
+  font-size: 12px;
+  line-height: 1.9;
+  text-align: center;
+  margin-top: 20px;
+}
 
-    footer {
-      text-align: center;
-      padding: 22px;
-      color: #666;
-      font-size: 12px;
-      border-top: 1px solid #ffffff0b;
-    }
+footer {
+  text-align: center;
+  padding: 22px;
+  border-top: 1px solid #ffffff0b;
+  color: #666;
+  font-size: 12px;
+}
 
-    footer span {
-      color: var(--gold);
-    }
+footer span {
+  color: var(--gold);
+}
 
-    [hidden] {
-      display: none !important;
-    }
+[hidden] {
+  display: none !important;
+}
 
-    @media (max-width: 420px) {
-      main {
-        margin: 30px auto;
-      }
+@media(max-width:420px) {
+  h1 {
+    font-size: 28px;
+  }
 
-      .card {
-        padding: 22px 17px;
-      }
+  header {
+    padding: 18px;
+  }
 
-      h1 {
-        font-size: 29px;
-      }
-
-      .status {
-        font-size: 10px;
-      }
-    }
-  </style>
+  .card {
+    padding: 20px 16px;
+  }
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="brand">
-      أَثَر شات
-      <small>ATHAR CHAT</small>
+
+<header>
+  <div class="brand">
+    أَثَر شات
+    <small>ATHAR CHAT</small>
+  </div>
+  <div class="status">تواصل يترك أثرًا ✦</div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <div class="logo">أ</div>
+    <h1>أهلًا بك في أَثَر</h1>
+    <p class="subtitle">مساحتك للتواصل ومشاركة اللحظات.</p>
+  </section>
+
+  <section class="card">
+
+    <div class="tabs">
+      <button
+        class="tab active"
+        id="loginTab"
+        type="button"
+        onclick="setMode('login')">
+        تسجيل الدخول
+      </button>
+
+      <button
+        class="tab"
+        id="signupTab"
+        type="button"
+        onclick="setMode('signup')">
+        إنشاء حساب
+      </button>
     </div>
 
-    <div class="status">تواصل يترك أثرًا ✦</div>
-  </header>
+    <form id="authForm">
 
-  <main>
-    <section class="intro">
-      <div class="logo">أ</div>
-      <h1>أهلًا بك في أَثَر</h1>
-      <p class="subtitle">مساحتك للتواصل ومشاركة اللحظات.</p>
-    </section>
-
-    <section class="card">
-      <div class="tabs">
-        <button
-          class="tab active"
-          id="loginTab"
-          type="button"
-          aria-pressed="true">
-          تسجيل الدخول
-        </button>
-
-        <button
-          class="tab"
-          id="signupTab"
-          type="button"
-          aria-pressed="false">
-          إنشاء حساب
-        </button>
+      <div id="nameGroup" hidden>
+        <label for="displayName">الاسم الظاهر</label>
+        <input
+          id="displayName"
+          type="text"
+          maxlength="40"
+          autocomplete="name"
+          placeholder="كيف نناديك؟">
       </div>
 
-      <form id="authForm">
-        <div id="nameGroup" hidden>
-          <label for="displayName">الاسم الظاهر</label>
-          <input
-            id="displayName"
-            type="text"
-            maxlength="40"
-            autocomplete="name"
-            placeholder="كيف نناديك؟">
-        </div>
+      <label for="email">البريد الإلكتروني</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="email"
+        placeholder="name@example.com"
+        required>
 
-        <label for="email">البريد الإلكتروني</label>
-        <input
-          id="email"
-          type="email"
-          autocomplete="email"
-          placeholder="name@example.com"
-          required>
+      <label for="password">كلمة المرور</label>
+      <input
+        id="password"
+        type="password"
+        minlength="8"
+        autocomplete="current-password"
+        placeholder="8 أحرف على الأقل"
+        required>
 
-        <label for="password">كلمة المرور</label>
-        <input
-          id="password"
-          type="password"
-          minlength="8"
-          autocomplete="current-password"
-          placeholder="8 أحرف على الأقل"
-          required>
+      <a
+        href="#"
+        id="forgotPassword"
+        class="forgot"
+        onclick="resetPassword(event)">
+        نسيت كلمة المرور؟
+      </a>
 
-        <a href="#" class="forgot" id="forgotPassword">
-          نسيت كلمة المرور؟
-        </a>
+      <button
+        id="submitButton"
+        class="primary"
+        type="submit">
+        تسجيل الدخول
+      </button>
 
-        <button class="primary" id="submitButton" type="submit">
-          تسجيل الدخول
-        </button>
+      <div
+        id="message"
+        class="message"
+        role="status"
+        aria-live="polite">
+      </div>
 
-        <div
-          id="message"
-          class="message"
-          role="status"
-          aria-live="polite">
-        </div>
-      </form>
+    </form>
 
-      <p class="terms">
-        بإنشاء حساب، فإنك توافق على الالتزام بقواعد المجتمع.
-        حافظ على خصوصيتك ولا تشارك كلمة مرورك مع أحد.
-      </p>
-    </section>
-  </main>
+    <p class="terms">
+      بإنشاء حساب، فإنك توافق على الالتزام بقواعد المجتمع.
+      حافظ على خصوصيتك ولا تشارك كلمة مرورك مع أحد.
+    </p>
 
-  <footer>
-    © 2026 <span>ATHAR CHAT</span> — جميع الحقوق محفوظة
-  </footer>
+  </section>
 
-  <!-- تحميل مكتبة Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+</main>
 
-  <script>
-    "use strict";
+<footer>
+  © 2026 <span>ATHAR CHAT</span> — جميع الحقوق محفوظة
+</footer>
 
-    // إعدادات مشروع Supabase
-    const SUPABASE_URL =
-      "https://krblbawgcpthbiixauyu.supabase.co";
+<script>
+"use strict";
 
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_MgcstiMSIONj8Tc4AJl1SA_q7QnzlUX";
+/* إعدادات مشروع ATHAR CHAT */
 
-    // عناصر الصفحة
-    const form = document.getElementById("authForm");
-    const loginTab = document.getElementById("loginTab");
-    const signupTab = document.getElementById("signupTab");
-    const nameGroup = document.getElementById("nameGroup");
-    const displayName = document.getElementById("displayName");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const submitButton = document.getElementById("submitButton");
-    const forgotPassword = document.getElementById("forgotPassword");
-    const message = document.getElementById("message");
+const SUPABASE_URL =
+  "https://krblbawgcpthbiixauyu.supabase.co";
 
-    let mode = "login";
-    let supabase = null;
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_MgcstiMSIONj8Tc4AJl1SA_q7QnzlUX";
 
-    // تهيئة Supabase دون تعطيل أزرار الصفحة إذا فشل التحميل
-    function initializeSupabase() {
-      try {
-        if (
-          window.supabase &&
-          typeof window.supabase.createClient === "function"
-        ) {
-          supabase = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
-          );
-        }
-      } catch (error) {
-        console.error("Supabase initialization error:", error);
-      }
-    }
+/* عناصر الصفحة */
 
-    initializeSupabase();
+const loginTab = document.getElementById("loginTab");
+const signupTab = document.getElementById("signupTab");
+const nameGroup = document.getElementById("nameGroup");
+const displayName = document.getElementById("displayName");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const submitButton = document.getElementById("submitButton");
+const forgotPassword = document.getElementById("forgotPassword");
+const authForm = document.getElementById("authForm");
+const message = document.getElementById("message");
 
-    // عرض الرسائل
-    function showMessage(text, type = "info") {
-      message.textContent = text;
-      message.className = "message show " + type;
-    }
+let mode = "login";
+let supabaseClient = null;
+let supabaseLoading = null;
 
-    function clearMessage() {
-      message.textContent = "";
-      message.className = "message";
-    }
+/* تبديل النموذج مستقل عن Supabase */
 
-    // التبديل بين تسجيل الدخول وإنشاء الحساب
-    function setMode(nextMode) {
-      mode = nextMode;
+function setMode(nextMode) {
+  mode = nextMode;
 
-      const signingUp = mode === "signup";
+  const signingUp = mode === "signup";
 
-      loginTab.classList.toggle("active", !signingUp);
-      signupTab.classList.toggle("active", signingUp);
+  loginTab.classList.toggle("active", !signingUp);
+  signupTab.classList.toggle("active", signingUp);
 
-      loginTab.setAttribute("aria-pressed", String(!signingUp));
-      signupTab.setAttribute("aria-pressed", String(signingUp));
+  nameGroup.hidden = !signingUp;
+  displayName.required = signingUp;
 
-      nameGroup.hidden = !signingUp;
-      displayName.required = signingUp;
+  passwordInput.autocomplete =
+    signingUp ? "new-password" : "current-password";
 
-      password.autocomplete = signingUp
-        ? "new-password"
-        : "current-password";
+  passwordInput.placeholder = signingUp
+    ? "8 أحرف على الأقل"
+    : "أدخل كلمة المرور";
 
-      password.placeholder = signingUp
-        ? "أنشئ كلمة مرور من 8 أحرف على الأقل"
-        : "أدخل كلمة المرور";
+  submitButton.textContent = signingUp
+    ? "إنشاء حساب جديد"
+    : "تسجيل الدخول";
 
-      submitButton.textContent = signingUp
-        ? "إنشاء حساب جديد"
-        : "تسجيل الدخول";
+  forgotPassword.style.display =
+    signingUp ? "none" : "block";
 
-      forgotPassword.style.display = signingUp
-        ? "none"
-        : "block";
+  message.className = "message";
+  message.textContent = "";
+}
 
-      clearMessage();
-    }
+/* عرض الرسائل */
 
-    // أحداث الأزرار
-    loginTab.addEventListener("click", function () {
-      setMode("login");
+function showMessage(text, type) {
+  message.textContent = text;
+  message.className = "message show " + type;
+}
+
+/* تحميل Supabase عند الحاجة فقط */
+
+async function getSupabase() {
+  if (supabaseClient) {
+    return supabaseClient;
+  }
+
+  if (!supabaseLoading) {
+    supabaseLoading = import(
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+    ).then(function (module) {
+      supabaseClient = module.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+      return supabaseClient;
+    }).catch(function (error) {
+      supabaseLoading = null;
+      throw error;
     });
+  }
 
-    signupTab.addEventListener("click", function () {
-      setMode("signup");
-    });
+  return supabaseLoading;
+}
 
-    // إنشاء حساب أو تسجيل الدخول
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
+/* إنشاء الحساب وتسجيل الدخول */
 
-      if (!supabase) {
-        showMessage(
-          "تعذر تحميل خدمة الحسابات. تحقق من اتصال الإنترنت ثم أعد تحميل الصفحة.",
-          "error"
-        );
-        return;
-      }
+authForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-      const emailValue = email.value.trim();
-      const passwordValue = password.value;
-      const nameValue = displayName.value.trim();
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  const name = displayName.value.trim();
 
-      if (passwordValue.length < 8) {
-        showMessage(
-          "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
-          "error"
-        );
-        return;
-      }
+  if (password.length < 8) {
+    showMessage(
+      "كلمة المرور يجب أن تتكون من 8 أحرف على الأقل.",
+      "error"
+    );
+    return;
+  }
 
-      if (mode === "signup" && !nameValue) {
-        showMessage("اكتب الاسم الظاهر أولًا.", "error");
-        displayName.focus();
-        return;
-      }
+  if (mode === "signup" && !name) {
+    showMessage("اكتب الاسم الظاهر أولًا.", "error");
+    displayName.focus();
+    return;
+  }
 
-      submitButton.disabled = true;
-      showMessage("جارٍ تنفيذ طلبك...", "info");
+  submitButton.disabled = true;
+  showMessage("جارٍ الاتصال بالخادم...", "info");
 
-      try {
-        let result;
+  try {
+    const supabase = await getSupabase();
+    let result;
 
-        if (mode === "signup") {
-          const redirectURL =
-            window.location.origin + window.location.pathname;
-
-          result = await supabase.auth.signUp({
-            email: emailValue,
-            password: passwordValue,
-            options: {
-              data: {
-                display_name: nameValue
-              },
-              emailRedirectTo: redirectURL
-            }
-          });
-
-          if (result.error) {
-            throw result.error;
-          }
-
-          if (
-            result.data &&
-            result.data.user &&
-            !result.data.session
-          ) {
-            showMessage(
-              "تم إنشاء طلب حسابك! افتح بريدك الإلكتروني وابحث عن رسالة تأكيد من Supabase، ثم اضغط رابط التأكيد. افحص مجلد الرسائل غير المرغوب فيها أيضًا.",
-              "success"
-            );
-          } else {
-            showMessage(
-              "تم إنشاء الحساب بنجاح!",
-              "success"
-            );
-          }
-
-        } else {
-          result = await supabase.auth.signInWithPassword({
-            email: emailValue,
-            password: passwordValue
-          });
-
-          if (result.error) {
-            throw result.error;
-          }
-
-          showMessage(
-            "تم تسجيل الدخول بنجاح!",
-            "success"
-          );
-
-          // يمكن إضافة الصفحة الرئيسية بعد تجهيزها.
+    if (mode === "signup") {
+      result = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            display_name: name
+          },
+          emailRedirectTo:
+            window.location.origin +
+            window.location.pathname
         }
+      });
 
-      } catch (error) {
-        console.error("Authentication error:", error);
-
-        let errorText =
-          error.message || "تعذر إكمال الطلب.";
-
-        if (
-          errorText.toLowerCase().includes("invalid login credentials")
-        ) {
-          errorText =
-            "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
-        } else if (
-          errorText.toLowerCase().includes("user already registered")
-        ) {
-          errorText =
-            "هذا البريد مسجل بالفعل. حاول تسجيل الدخول بدلًا من ذلك.";
-        } else if (
-          errorText.toLowerCase().includes("password should be")
-        ) {
-          errorText =
-            "كلمة المرور لا تستوفي شروط الأمان المطلوبة.";
-        } else if (
-          errorText.toLowerCase().includes("email not confirmed")
-        ) {
-          errorText =
-            "يجب تأكيد بريدك الإلكتروني قبل تسجيل الدخول.";
-        } else if (
-          errorText.toLowerCase().includes("failed to fetch")
-        ) {
-          errorText =
-            "تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجددًا.";
-        }
-
-        showMessage(errorText, "error");
-
-      } finally {
-        submitButton.disabled = false;
-      }
-    });
-
-    // استعادة كلمة المرور
-    forgotPassword.addEventListener("click", async function (event) {
-      event.preventDefault();
-
-      if (!supabase) {
-        showMessage(
-          "خدمة الحسابات غير متاحة حاليًا. تحقق من اتصال الإنترنت.",
-          "error"
-        );
-        return;
+      if (result.error) {
+        throw result.error;
       }
 
-      const emailValue = email.value.trim();
-
-      if (!emailValue) {
+      if (result.data.user && !result.data.session) {
         showMessage(
-          "أدخل بريدك الإلكتروني أولًا، ثم اضغط نسيت كلمة المرور.",
-          "info"
-        );
-        email.focus();
-        return;
-      }
-
-      try {
-        forgotPassword.style.pointerEvents = "none";
-
-        showMessage(
-          "جارٍ إرسال رابط استعادة كلمة المرور...",
-          "info"
-        );
-
-        const redirectURL =
-          window.location.origin + window.location.pathname;
-
-        const result = await supabase.auth.resetPasswordForEmail(
-          emailValue,
-          {
-            redirectTo: redirectURL
-          }
-        );
-
-        if (result.error) {
-          throw result.error;
-        }
-
-        showMessage(
-          "إذا كان البريد مسجلًا، فستصلك رسالة لاستعادة كلمة المرور. افحص صندوق الوارد والرسائل غير المرغوب فيها.",
+          "تم إرسال طلب إنشاء الحساب. افتح بريدك الإلكتروني واضغط رابط التأكيد لإكمال التسجيل.",
           "success"
         );
-
-      } catch (error) {
-        console.error("Password recovery error:", error);
-
+      } else {
         showMessage(
-          error.message || "تعذر إرسال رابط الاستعادة.",
-          "error"
+          "تم إنشاء الحساب بنجاح!",
+          "success"
         );
-
-      } finally {
-        forgotPassword.style.pointerEvents = "";
       }
-    });
 
-    // التأكد من فتح وضع تسجيل الدخول عند بدء الصفحة
-    setMode("login");
-  </script>
+    } else {
+      result = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (result.error) {
+        throw result.error;
+      }
+
+      showMessage(
+        "تم تسجيل الدخول بنجاح!",
+        "success"
+      );
+    }
+
+  } catch (error) {
+    console.error(error);
+
+    showMessage(
+      error.message ||
+      "تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجددًا.",
+      "error"
+    );
+
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+
+/* استعادة كلمة المرور */
+
+async function resetPassword(event) {
+  event.preventDefault();
+
+  const email = emailInput.value.trim();
+
+  if (!email) {
+    showMessage(
+      "أدخل بريدك الإلكتروني أولًا.",
+      "info"
+    );
+    emailInput.focus();
+    return;
+  }
+
+  try {
+    showMessage("جارٍ إرسال رابط الاستعادة...", "info");
+
+    const supabase = await getSupabase();
+
+    const result =
+      await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo:
+          window.location.origin +
+          window.location.pathname
+      });
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    showMessage(
+      "إذا كان البريد مسجلًا، فستصلك رسالة استعادة كلمة المرور.",
+      "success"
+    );
+
+  } catch (error) {
+    console.error(error);
+
+    showMessage(
+      error.message || "تعذر إرسال رابط الاستعادة.",
+      "error"
+    );
+  }
+}
+
+/* الوضع الافتراضي */
+
+setMode("login");
+</script>
+
 </body>
-  </html>
+</html>
