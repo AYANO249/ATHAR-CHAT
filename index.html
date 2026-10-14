@@ -4,1341 +4,1368 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#090909">
-<title>أثر شات | ATHAR CHAT</title>
+<title>أَثَر شات | ATHAR CHAT</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --gold:#d7b56d;
-  --light:#f4dfa4;
+:root{
   --bg:#090909;
-  --panel:#111;
-  --border:#302719;
-  --muted:#aaa;
+  --card:#121210;
+  --card2:#1b1a16;
+  --gold:#d9b65e;
+  --gold2:#f3dda0;
+  --text:#f7f3e8;
+  --muted:#a29d8d;
+  --border:#302d23;
+  --green:#4bdb9c;
+  --red:#ff7777;
 }
-
-* { box-sizing:border-box; }
-
-[hidden] { display:none!important; }
-
-body {
+*{box-sizing:border-box}
+body{
   margin:0;
+  background:radial-gradient(ellipse at top,#211a0c,var(--bg) 55%);
+  color:var(--text);
+  font-family:'Tajawal',sans-serif;
   min-height:100vh;
-  background:var(--bg);
-  color:#fff;
-  font-family:Tajawal,sans-serif;
 }
-
-button,input,textarea { font:inherit; }
-button { cursor:pointer; }
-
-header {
-  padding:15px 5%;
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.gold{color:var(--gold2)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:2px;
+}
+.app{max-width:1200px;margin:auto;padding:16px}
+header{
   display:flex;
+  align-items:center;
   justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.brand{
+  display:flex;
   align-items:center;
   gap:12px;
-  border-bottom:1px solid #ffffff15;
-  background:#090909;
-}
-
-.brand {
-  color:var(--light);
   font-size:23px;
   font-weight:800;
 }
-
-.brand small {
-  display:block;
-  font-size:10px;
-  letter-spacing:3px;
-  direction:ltr;
+.logo{
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border-radius:15px;
+  background:linear-gradient(135deg,var(--gold2),#997326);
+  color:#100f0b;
+  font-size:25px;
+  box-shadow:0 0 25px #d9b65e25;
 }
-
-main {
-  width:min(100% - 28px,520px);
-  margin:32px auto;
-}
-
-.intro {
-  text-align:center;
-  margin-bottom:22px;
-}
-
-.logo {
-  width:65px;
-  height:65px;
-  display:grid;
-  place-items:center;
-  margin:0 auto 14px;
-  border:1px solid var(--gold);
-  border-radius:20px;
-  color:var(--light);
-  font-size:32px;
-}
-
-h1,h2,p { overflow-wrap:anywhere; }
-
-h1 { color:var(--light); }
-
-.subtitle,.muted { color:var(--muted); }
-
-.card {
-  padding:21px;
-  margin-bottom:16px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  background:linear-gradient(145deg,#151515,#0d0d0d);
-}
-
-.tabs {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:20px;
-}
-
-button {
-  padding:12px;
-  border-radius:10px;
-}
-
-.primary {
-  background:linear-gradient(110deg,#f0d99b,#b28b43);
-  color:#171209;
+.actions{display:flex;gap:8px}
+.btn{
   border:0;
+  border-radius:12px;
+  padding:11px 15px;
+  background:var(--gold);
+  color:#151209;
   font-weight:800;
 }
-
-.secondary {
-  color:var(--light);
-  background:#1b1b1b;
-  border:1px solid #443822;
+.btn.secondary{
+  background:var(--card2);
+  color:var(--text);
+  border:1px solid var(--border);
 }
-
-.danger {
-  color:#ffbaba;
-  background:#351515;
-  border:1px solid #552222;
+.btn.danger{
+  background:#301a1a;
+  color:#ffc5c5;
 }
-
-.tab {
-  color:#aaa;
-  background:#090909;
-  border:1px solid #282828;
+.wide{width:100%;margin-top:9px}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
 }
-
-.tab.active {
-  background:var(--gold);
-  color:#171209;
+.auth{
+  max-width:430px;
+  margin:7vh auto;
 }
-
-label {
-  display:block;
-  margin:15px 0 7px;
-  color:#ddd1b6;
+.tabs{
+  display:flex;
+  gap:4px;
+  padding:4px;
+  margin:18px 0;
+  border-radius:12px;
+  background:#080808;
 }
-
-input,textarea {
-  width:100%;
-  padding:12px;
-  border:1px solid #34302a;
-  border-radius:10px;
-  background:#090909;
-  color:white;
-  outline:none;
-}
-
-input:focus,textarea:focus {
-  border-color:var(--gold);
-}
-
-.wide { width:100%; margin-top:16px; }
-
-.link {
-  display:block;
-  margin-top:12px;
-  color:var(--gold);
-  text-align:left;
-  font-size:13px;
-  cursor:pointer;
-}
-
-.message {
-  display:none;
-  margin-top:13px;
-  padding:12px;
+.tabs button{
+  flex:1;
+  padding:11px;
+  border:0;
   border-radius:9px;
-  line-height:1.8;
-  overflow-wrap:anywhere;
+  color:var(--muted);
+  background:transparent;
 }
-
-.message.show { display:block; }
-.info { color:var(--light); background:#d7b56d18; }
-.error { color:#ffaaaa; background:#ff454515; }
-.success { color:#8ce7b5; background:#39cf8515; }
-
-/* الصفحة الرئيسية */
-
-#homeView {
-  min-height:calc(100vh - 65px);
-  padding:20px 14px 35px;
-  background-color:#090909;
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
+.tabs button.active{
+  background:#302715;
+  color:var(--gold2);
 }
-
-.container {
-  position:relative;
-  width:min(100%,680px);
-  margin:auto;
-}
-
-.homeTop {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.homeTitle {
-  margin:0;
-  font-size:26px;
-}
-
-.nav {
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:16px;
-}
-
-.nav button { flex:1; min-width:100px; }
-
-.panel {
-  padding:19px;
-  margin-bottom:15px;
-  border:1px solid #d7b56d55;
-  border-radius:17px;
-  background:#101010ed;
-  backdrop-filter:blur(10px);
-}
-
-.panel h2 {
-  margin-top:0;
-  color:var(--light);
-}
-
-.row {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.row > button { flex:1; }
-
-.small {
-  color:#aaa;
-  font-size:12px;
-  line-height:1.8;
-}
-
-.userTag {
-  color:var(--light);
-  direction:ltr;
-  display:inline-block;
-}
-
-.chatItem {
-  width:100%;
-  text-align:right;
-  margin:7px 0;
-  padding:13px;
-  color:white;
-  background:#171717;
-  border:1px solid #342a1a;
-  border-radius:10px;
-}
-
-.chatItem strong {
-  color:var(--light);
-}
-
-.chatItem small {
-  display:block;
-  color:#aaa;
-  margin-top:5px;
-}
-
-.chatHeader {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.chatMessages {
-  height:330px;
-  overflow-y:auto;
+.field{
   display:flex;
   flex-direction:column;
-  gap:10px;
-  padding:12px;
-  margin:14px 0;
-  background:#080808;
-  border:1px solid #302719;
-  border-radius:12px;
+  gap:7px;
+  margin:13px 0;
 }
-
-.bubble {
-  max-width:85%;
-  padding:10px 12px;
-  border-radius:12px;
-  line-height:1.7;
-  overflow-wrap:anywhere;
-  white-space:pre-wrap;
-}
-
-.bubble.mine {
-  align-self:flex-start;
-  background:#49391e;
-  border:1px solid #80612d;
-}
-
-.bubble.theirs {
-  align-self:flex-end;
-  background:#202020;
-  border:1px solid #353535;
-}
-
-.bubble time {
-  display:block;
-  margin-top:5px;
-  color:#c6c6c6;
-  font-size:10px;
-}
-
-#messageInput {
-  resize:vertical;
-  min-height:48px;
-}
-
-.preview {
+.field label{font-size:13px;color:var(--gold2)}
+.field input,.field textarea,.search{
   width:100%;
-  max-height:220px;
-  object-fit:cover;
-  border-radius:10px;
-  margin-top:12px;
+  border:1px solid #383326;
+  border-radius:12px;
+  padding:12px;
+  background:#090909;
+  color:var(--text);
+  outline:none;
 }
-
-footer {
-  padding:20px;
-  color:#777;
-  text-align:center;
+.field input:focus,.field textarea:focus,.search:focus{
+  border-color:var(--gold);
+}
+.field textarea{resize:vertical;min-height:85px}
+.layout{
+  display:grid;
+  grid-template-columns:320px minmax(0,1fr);
+  gap:15px;
+  min-height:70vh;
+}
+.sidebar,.chat{
+  min-width:0;
+  overflow:hidden;
+  background:#10100fee;
+  border:1px solid var(--border);
+  border-radius:19px;
+}
+.sidehead{
+  padding:15px;
+  border-bottom:1px solid var(--border);
+}
+.myprofile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.avatar{
+  width:46px;height:46px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid #6a572d;
+  border-radius:50%;
+  background:#302819;
+  color:var(--gold2);
+  font-weight:800;
+}
+.avatar img{
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.profiletext{flex:1;min-width:0}
+.profiletext strong,.profiletext span{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.profiletext span{
+  margin-top:4px;
+  color:var(--muted);
   font-size:12px;
 }
-
-footer span { color:var(--gold); }
-
-@media(max-width:420px) {
-  .panel,.card { padding:15px; }
-  .homeTitle { font-size:22px; }
+.icon{
+  min-width:40px;
+  height:40px;
+  border:1px solid #423821;
+  border-radius:11px;
+  background:#252116;
+  color:var(--gold2);
+}
+.search{margin-top:13px}
+.sectiontitle{
+  padding:13px 15px 5px;
+  color:var(--gold2);
+  font-weight:800;
+}
+.userlist{
+  max-height:55vh;
+  overflow:auto;
+  padding:6px;
+}
+.user{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  margin-bottom:3px;
+  border:1px solid transparent;
+  border-radius:13px;
+  cursor:pointer;
+}
+.user:hover,.user.active{
+  background:#282113;
+  border-color:#44371c;
+}
+.user .avatar{width:43px;height:43px}
+.userinfo{flex:1;min-width:0}
+.userinfo strong,.userinfo span{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.userinfo span{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+.dot{
+  display:inline-block;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#777;
+  margin-left:5px;
+}
+.dot.online{
+  background:var(--green);
+  box-shadow:0 0 7px #4bdb9c80;
+}
+.chathead{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:76px;
+  padding:13px 16px;
+  border-bottom:1px solid var(--border);
+}
+.chathead .avatar{width:43px;height:43px}
+.chatheadtext{flex:1;min-width:0}
+.chatheadtext strong,.chatheadtext span{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.chatheadtext span{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:5px;
+}
+.messages{
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  height:calc(70vh - 155px);
+  min-height:300px;
+  overflow-y:auto;
+  padding:17px;
+  background:#0b0b0bf5;
+}
+.empty{
+  margin:auto;
+  padding:24px 10px;
+  text-align:center;
+  color:var(--muted);
+  line-height:2;
+}
+.bubble{
+  align-self:flex-start;
+  max-width:min(80%,520px);
+  overflow-wrap:anywhere;
+  padding:10px 12px;
+  border:1px solid #343025;
+  border-radius:15px 15px 15px 4px;
+  background:#201f19;
+}
+.bubble.mine{
+  align-self:flex-end;
+  border-color:#685329;
+  border-radius:15px 15px 4px 15px;
+  background:#382c16;
+}
+.bubble img{
+  display:block;
+  max-width:100%;
+  max-height:330px;
+  border-radius:10px;
+  margin-bottom:6px;
+}
+.bubbletime{
+  text-align:left;
+  margin-top:5px;
+  color:#bcb18e;
+  font-size:10px;
+}
+.typing{
+  min-height:23px;
+  padding:2px 16px;
+  color:var(--gold2);
+  font-size:12px;
+}
+.composer{
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid var(--border);
+}
+.composer textarea{
+  flex:1;
+  min-width:0;
+  min-height:44px;
+  max-height:130px;
+  resize:none;
+  border:1px solid #403723;
+  border-radius:12px;
+  padding:12px;
+  background:#090909;
+  color:var(--text);
+}
+.composer .btn,.composer .icon{height:44px}
+.composer .icon{min-width:44px}
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  display:grid;
+  place-items:center;
+  padding:15px;
+  background:#000c;
+}
+.modalbox{
+  width:min(100%,470px);
+  max-height:90vh;
+  overflow:auto;
+  padding:20px;
+  border:1px solid #57482a;
+  border-radius:19px;
+  background:#121210;
+}
+.modalhead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.avatar-edit{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:17px 0;
+}
+.avatar-edit .avatar{width:75px;height:75px;font-size:24px}
+.notice{
+  position:fixed;
+  z-index:30;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:90%;
+  padding:12px 17px;
+  border:1px solid #67532b;
+  border-radius:12px;
+  background:#242116;
+  box-shadow:0 10px 30px #0008;
+}
+footer{
+  padding:22px 0 7px;
+  text-align:center;
+  color:#777366;
+  font-size:12px;
+}
+.mobileback{display:none}
+@media(max-width:760px){
+  .app{padding:10px}
+  .brand{font-size:20px}
+  header{align-items:flex-start}
+  .actions{flex-direction:column}
+  .actions .btn{padding:8px;font-size:12px}
+  .layout{display:block}
+  .sidebar{margin-bottom:12px}
+  .userlist{max-height:210px}
+  .chat{min-height:55vh}
+  .messages{height:48vh;min-height:250px}
+  .chat.notselected .chathead,
+  .chat.notselected .messages,
+  .chat.notselected .typing,
+  .chat.notselected .composer{display:none}
+  .chat.notselected:after{
+    content:'اختر شخصًا من القائمة لبدء المحادثة';
+    display:block;
+    padding:28px 10px;
+    text-align:center;
+    color:var(--muted);
+  }
+  .mobileback{display:block}
+  .bubble{max-width:89%}
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
 <header>
   <div class="brand">
-    أَثَر شات
-    <small>ATHAR CHAT</small>
+    <div class="logo">أ</div>
+    <div>أَثَر شات<div class="small muted">مساحة للتواصل</div></div>
   </div>
-  <span class="muted">تواصل يترك أثرًا ✦</span>
+  <div class="actions hidden" id="topActions">
+    <button class="btn secondary" id="editTop">ملفي الشخصي</button>
+    <button class="btn danger" id="logout">خروج</button>
+  </div>
 </header>
 
-<!-- تسجيل الدخول -->
+<section class="auth card" id="authView">
+  <h2 id="authTitle">أهلًا بعودتك</h2>
+  <p class="muted" id="authSubtitle">سجّل الدخول لمتابعة محادثاتك.</p>
 
-<main id="authView">
-  <section class="intro">
-    <div class="logo">أ</div>
-    <h1>أهلًا بك في أَثَر</h1>
-    <p class="subtitle">مساحتك للتواصل ومشاركة اللحظات.</p>
-  </section>
-
-  <section class="card">
-    <div class="tabs">
-      <button id="loginTab" class="tab active"
-        onclick="setMode('login')">تسجيل الدخول</button>
-
-      <button id="signupTab" class="tab"
-        onclick="setMode('signup')">إنشاء حساب</button>
-    </div>
-
-    <form id="authForm">
-      <div id="nameGroup" hidden>
-        <label for="displayName">الاسم الظاهر</label>
-        <input id="displayName" maxlength="40"
-          placeholder="اسمك">
-      </div>
-
-      <label for="email">البريد الإلكتروني</label>
-      <input id="email" type="email" required
-        autocomplete="email" placeholder="name@example.com">
-
-      <label for="password">كلمة المرور</label>
-      <input id="password" type="password" required
-        minlength="8" autocomplete="current-password"
-        placeholder="8 أحرف على الأقل">
-
-      <a class="link" id="forgotPassword"
-        onclick="resetPassword()">نسيت كلمة المرور؟</a>
-
-      <button id="submitButton" class="primary wide">
-        تسجيل الدخول
-      </button>
-
-      <div id="authMessage" class="message"></div>
-    </form>
-  </section>
-</main>
-
-<!-- الصفحة الرئيسية -->
-
-<section id="homeView" hidden>
-  <div class="container">
-
-    <div class="homeTop">
-      <div>
-        <h1 class="homeTitle">أَثَر شات ✦</h1>
-        <div class="small" id="userEmail"></div>
-      </div>
-
-      <button class="secondary" onclick="logout()">
-        تسجيل الخروج
-      </button>
-    </div>
-
-    <div class="nav">
-      <button class="primary" onclick="showSection('profileSection')">
-        ملفي الشخصي
-      </button>
-      <button class="secondary" onclick="showSection('findSection')">
-        بدء دردشة
-      </button>
-      <button class="secondary" onclick="showSection('inboxSection')">
-        محادثاتي
-      </button>
-      <button class="secondary" onclick="showSection('backgroundSection')">
-        الخلفية
-      </button>
-    </div>
-
-    <!-- الملف الشخصي -->
-
-    <section class="panel" id="profileSection">
-      <h2>👤 ملفي الشخصي</h2>
-      <p id="profileStatus">جارٍ تحميل الملف الشخصي...</p>
-
-      <div id="usernameSetup" hidden>
-        <label for="usernameInput">اختر يوزرك الفريد</label>
-        <input id="usernameInput" maxlength="20"
-          placeholder="مثال: ayano249"
-          autocomplete="off" dir="ltr">
-
-        <p class="small">
-          استخدم الأحرف الإنجليزية الصغيرة والأرقام والشرطة السفلية.
-          من 3 إلى 20 رمزًا. اليوزر لا يتكرر ولا يمكن تغييره.
-        </p>
-
-        <button class="primary wide" onclick="createUsername()">
-          حفظ اليوزر
-        </button>
-      </div>
-
-      <div id="myUsernameArea" hidden>
-        <p>اليوزر الخاص بك:</p>
-        <h2 class="userTag" id="myUsername"></h2>
-        <p class="small">شارك اليوزر مع الآخرين حتى يستطيعوا العثور عليك.</p>
-      </div>
-
-      <div id="profileMessage" class="message"></div>
-    </section>
-
-    <!-- البحث عن مستخدم -->
-
-    <section class="panel" id="findSection" hidden>
-      <h2>🔎 بدء دردشة</h2>
-      <p class="small">
-        اكتب اليوزر الكامل للشخص الذي تريد مراسلته.
-      </p>
-
-      <label for="searchUsername">يوزر المستخدم</label>
-      <input id="searchUsername" maxlength="20"
-        placeholder="username" dir="ltr">
-
-      <button class="primary wide" onclick="findUser()">
-        البحث عن المستخدم
-      </button>
-
-      <div id="searchMessage" class="message"></div>
-      <div id="searchResult"></div>
-    </section>
-
-    <!-- قائمة المحادثات -->
-
-    <section class="panel" id="inboxSection" hidden>
-      <h2>💬 محادثاتي</h2>
-      <p class="small">المحادثات التي أرسلت أو استقبلت فيها رسائل.</p>
-
-      <button class="secondary wide" onclick="loadConversations()">
-        تحديث المحادثات
-      </button>
-
-      <div id="conversationList" style="margin-top:12px"></div>
-      <div id="inboxMessage" class="message"></div>
-    </section>
-
-    <!-- نافذة المحادثة -->
-
-    <section class="panel" id="chatSection" hidden>
-      <div class="chatHeader">
-        <div>
-          <h2 id="chatTitle">المحادثة</h2>
-          <span class="small" id="chatUsername"></span>
-        </div>
-
-        <button class="secondary" onclick="closeChat()">
-          رجوع
-        </button>
-      </div>
-
-      <div id="chatMessages" class="chatMessages"></div>
-
-      <form id="sendForm">
-        <label for="messageInput">اكتب رسالتك</label>
-        <textarea id="messageInput" maxlength="2000"
-          required placeholder="اكتب رسالتك هنا..."></textarea>
-
-        <button id="sendButton" class="primary wide">
-          إرسال الرسالة
-        </button>
-      </form>
-
-      <div id="chatMessage" class="message"></div>
-      <p class="small">تُحدّث المحادثة تلقائيًا كل بضع ثوانٍ.</p>
-    </section>
-
-    <!-- تغيير الخلفية -->
-
-    <section class="panel" id="backgroundSection" hidden>
-      <h2>🖼️ خلفية الصفحة الرئيسية</h2>
-
-      <label for="backgroundFile" class="secondary"
-        style="display:block;text-align:center;padding:13px">
-        اختيار صورة من المعرض
-      </label>
-
-      <input id="backgroundFile" type="file"
-        accept="image/*" hidden>
-
-      <img id="backgroundPreview" class="preview" hidden alt="معاينة الخلفية">
-
-      <div class="row" id="backgroundActions" hidden>
-        <button class="primary" onclick="applyBackground()">
-          تطبيق الخلفية
-        </button>
-        <button class="secondary" onclick="cancelPreview()">
-          إلغاء
-        </button>
-      </div>
-
-      <button class="secondary wide" onclick="resetBackground()">
-        استعادة الخلفية الأصلية
-      </button>
-
-      <div id="backgroundMessage" class="message"></div>
-      <p class="small">تُحفظ الصورة على هذا الجهاز والمتصفح فقط.</p>
-    </section>
-
+  <div class="tabs">
+    <button class="active" id="loginTab">تسجيل الدخول</button>
+    <button id="signupTab">إنشاء حساب</button>
   </div>
+
+  <form id="authForm">
+    <div class="field hidden" id="usernameField">
+      <label for="username">اسم المستخدم</label>
+      <input id="username" minlength="3" maxlength="20"
+        pattern="[A-Za-z0-9_]{3,20}" autocomplete="username">
+      <span class="small muted">3–20 حرفًا إنجليزيًا أو رقمًا أو _</span>
+    </div>
+
+    <div class="field hidden" id="displayField">
+      <label for="displayName">الاسم الظاهر</label>
+      <input id="displayName" maxlength="40">
+    </div>
+
+    <div class="field">
+      <label for="email">البريد الإلكتروني</label>
+      <input id="email" type="email" required autocomplete="email">
+    </div>
+
+    <div class="field">
+      <label for="password">كلمة المرور</label>
+      <input id="password" type="password" required minlength="6"
+        autocomplete="current-password">
+    </div>
+
+    <button class="btn wide" id="authSubmit">دخول</button>
+  </form>
+
+  <button class="btn secondary wide" id="forgot">نسيت كلمة المرور؟</button>
+  <p class="small muted">لا تشارك كلمة مرورك مع أي شخص.</p>
 </section>
 
-<footer>© 2026 <span>ATHAR CHAT</span></footer>
+<main class="layout hidden" id="mainView">
+
+  <aside class="sidebar">
+    <div class="sidehead">
+      <div class="myprofile">
+        <div class="avatar" id="myAvatar">أ</div>
+        <div class="profiletext">
+          <strong id="myName">حسابي</strong>
+          <span id="myUsername">@username</span>
+        </div>
+        <button class="icon" id="editProfile" aria-label="تعديل الملف الشخصي">✎</button>
+      </div>
+      <input class="search" id="searchUsers"
+        placeholder="ابحث باسم المستخدم..." autocomplete="off">
+    </div>
+    <div class="sectiontitle">الأشخاص والمحادثات</div>
+    <div class="userlist" id="userList">
+      <div class="empty">جارٍ التحميل...</div>
+    </div>
+  </aside>
+
+  <section class="chat notselected" id="chatPanel">
+    <div class="chathead" id="chatHead">
+      <div class="avatar">أ</div>
+      <div class="chatheadtext">
+        <strong>أَثَر شات</strong>
+        <span>اختر شخصًا من القائمة</span>
+      </div>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="empty">💬<br>اختر شخصًا لبدء محادثة خاصة.</div>
+    </div>
+
+    <div class="typing" id="typingLine"></div>
+
+    <form class="composer" id="messageForm">
+      <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" class="hidden">
+      <button type="button" class="icon" id="attach" title="إرسال صورة">▧</button>
+      <textarea id="messageInput" rows="1" maxlength="2000"
+        placeholder="اكتب رسالتك..." disabled></textarea>
+      <button class="btn" id="send" type="submit" disabled>إرسال</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>أَثَر شات · تواصل باحترام واحفظ خصوصيتك.</footer>
+</div>
+
+<div class="modal hidden" id="profileModal" role="dialog" aria-modal="true">
+  <div class="modalbox">
+    <div class="modalhead">
+      <h2 style="margin:0">ملفي الشخصي</h2>
+      <button class="icon" id="closeProfile">✕</button>
+    </div>
+
+    <div class="avatar-edit">
+      <div class="avatar" id="previewAvatar">أ</div>
+      <div>
+        <button class="btn secondary" id="chooseAvatar" type="button">تغيير الصورة</button>
+        <p class="small muted">PNG أو JPG أو WEBP، بحد أقصى 5 ميغابايت.</p>
+      </div>
+    </div>
+
+    <input type="file" id="avatarInput" accept="image/png,image/jpeg,image/webp" class="hidden">
+
+    <div class="field">
+      <label for="profileName">الاسم الظاهر</label>
+      <input id="profileName" maxlength="40">
+    </div>
+
+    <div class="field">
+      <label for="profileBio">نبذة عنك</label>
+      <textarea id="profileBio" maxlength="180" placeholder="اكتب نبذة قصيرة..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="profileUsername">اسم المستخدم</label>
+      <input id="profileUsername" disabled>
+    </div>
+
+    <button class="btn wide" id="saveProfile">حفظ التعديلات</button>
+  </div>
+</div>
+
+<div class="notice hidden" id="notice" role="status"></div>
 
 <script>
-"use strict";
+(() => {
+'use strict';
 
-/* إعداد Supabase */
+/* إعدادات Supabase الخاصة بمشروع ATHAR-CHAT */
+const SUPABASE_URL = 'https://krblbawgcpthbiixauyu.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_MgcstiMSIONj8Tc4AJl1SA_q7QnzlUX';
+const BUCKET = 'athar-chat-media';
 
-const SUPABASE_URL =
-  "https://krblbawgcpthbiixauyu.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_MgcstiMSIONj8Tc4AJl1SA_q7QnzlUX";
-
-let db = null;
-let mode = "login";
-let currentUser = null;
-let myProfile = null;
-let activeChat = null;
-let refreshTimer = null;
-let previewData = null;
-
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
-function message(id, text, type = "info") {
-  const el = $(id);
-  el.textContent = text;
-  el.className = "message show " + type;
+let user = null;
+let profile = null;
+let people = [];
+let active = null;
+let messages = [];
+let online = new Set();
+let realtime = null;
+let presence = null;
+let typingChannel = null;
+let typingTimer = null;
+let noticeTimer = null;
+let signup = false;
+let chosenAvatar = null;
+
+function toast(message) {
+  const el = $('notice');
+  el.textContent = message;
+  el.classList.remove('hidden');
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => el.classList.add('hidden'), 3500);
 }
 
-function clearMessage(id) {
-  $(id).textContent = "";
-  $(id).className = "message";
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[char]);
 }
 
-async function getDB() {
-  if (db) return db;
-
-  const sdk = await import(
-    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
-  );
-
-  db = sdk.createClient(SUPABASE_URL, SUPABASE_KEY);
-  return db;
+function initial(p) {
+  return esc((p?.display_name || p?.username || 'أ').trim().slice(0,1));
 }
 
-/* تبويبات الدخول */
-
-function setMode(value) {
-  mode = value;
-
-  $("loginTab").classList.toggle("active", value === "login");
-  $("signupTab").classList.toggle("active", value === "signup");
-
-  $("nameGroup").hidden = value !== "signup";
-  $("displayName").required = value === "signup";
-
-  $("password").autocomplete =
-    value === "signup" ? "new-password" : "current-password";
-
-  $("submitButton").textContent =
-    value === "signup" ? "إنشاء حساب" : "تسجيل الدخول";
-
-  $("forgotPassword").hidden = value === "signup";
-
-  clearMessage("authMessage");
+function avatarHTML(p) {
+  return `<div class="avatar">${p?.avatar_url
+    ? `<img src="${esc(p.avatar_url)}" alt="" loading="lazy">`
+    : initial(p)}</div>`;
 }
 
-/* الدخول وإنشاء الحساب */
+function timeText(value) {
+  try {
+    return new Intl.DateTimeFormat('ar', {
+      hour:'2-digit', minute:'2-digit'
+    }).format(new Date(value));
+  } catch { return ''; }
+}
 
-$("authForm").addEventListener("submit", async event => {
+function onlineNow(id) {
+  return online.has(id);
+}
+
+function lastSeen(p) {
+  if (!p?.last_seen) return 'آخر ظهور غير معروف';
+
+  const diff = Date.now() - new Date(p.last_seen).getTime();
+
+  if (diff < 60000) return 'آخر ظهور قبل لحظات';
+  if (diff < 3600000) return `آخر ظهور قبل ${Math.floor(diff/60000)} دقيقة`;
+  if (diff < 86400000) return `آخر ظهور قبل ${Math.floor(diff/3600000)} ساعة`;
+
+  return 'آخر ظهور ' + new Intl.DateTimeFormat('ar', {
+    day:'numeric', month:'short'
+  }).format(new Date(p.last_seen));
+}
+
+function errorText(error) {
+  const message = error?.message || 'حدث خطأ غير معروف.';
+
+  if (/Invalid login credentials/i.test(message))
+    return 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
+  if (/Email not confirmed/i.test(message))
+    return 'أكّد بريدك الإلكتروني أولًا.';
+  if (/duplicate key|unique constraint/i.test(message))
+    return 'اسم المستخدم مستخدم بالفعل.';
+  if (/Failed to fetch/i.test(message))
+    return 'تعذّر الاتصال. تحقق من الإنترنت وإعدادات Supabase.';
+
+  return message;
+}
+
+function showAuth() {
+  $('authView').classList.remove('hidden');
+  $('mainView').classList.add('hidden');
+  $('topActions').classList.add('hidden');
+}
+
+function showMain() {
+  $('authView').classList.add('hidden');
+  $('mainView').classList.remove('hidden');
+  $('topActions').classList.remove('hidden');
+}
+
+function authMode(isSignup) {
+  signup = isSignup;
+  $('loginTab').classList.toggle('active', !signup);
+  $('signupTab').classList.toggle('active', signup);
+  $('usernameField').classList.toggle('hidden', !signup);
+  $('displayField').classList.toggle('hidden', !signup);
+  $('username').required = signup;
+  $('displayName').required = signup;
+  $('authTitle').textContent = signup ? 'إنشاء حساب جديد' : 'أهلًا بعودتك';
+  $('authSubtitle').textContent = signup
+    ? 'اختر اسم مستخدم مميزًا.'
+    : 'سجّل الدخول لمتابعة محادثاتك.';
+  $('authSubmit').textContent = signup ? 'إنشاء الحساب' : 'دخول';
+  $('password').autocomplete = signup ? 'new-password' : 'current-password';
+}
+
+$('loginTab').onclick = () => authMode(false);
+$('signupTab').onclick = () => authMode(true);
+
+$('forgot').onclick = async () => {
+  const email = $('email').value.trim();
+  if (!email) return toast('اكتب بريدك الإلكتروني أولًا.');
+
+  const { error } = await db.auth.resetPasswordForEmail(email, {
+    redirectTo: location.origin + location.pathname
+  });
+
+  if (error) toast(errorText(error));
+  else toast('إذا كان البريد مسجلًا، ستصلك رسالة استعادة.');
+};
+
+$('authForm').onsubmit = async event => {
   event.preventDefault();
 
-  const email = $("email").value.trim();
-  const password = $("password").value;
-  const name = $("displayName").value.trim();
-
-  if (password.length < 8) {
-    message("authMessage", "كلمة المرور يجب أن تكون 8 أحرف على الأقل.", "error");
-    return;
-  }
-
-  if (mode === "signup" && !name) {
-    message("authMessage", "اكتب اسمك أولًا.", "error");
-    return;
-  }
-
-  $("submitButton").disabled = true;
+  const button = $('authSubmit');
+  button.disabled = true;
 
   try {
-    const client = await getDB();
-    let result;
+    const email = $('email').value.trim();
+    const password = $('password').value;
 
-    if (mode === "signup") {
-      result = await client.auth.signUp({
+    if (signup) {
+      const username = $('username').value.trim().toLowerCase();
+      const display_name = $('displayName').value.trim();
+
+      if (!/^[a-z0-9_]{3,20}$/.test(username))
+        throw new Error('اسم المستخدم يجب أن يكون 3–20 حرفًا إنجليزيًا أو رقمًا أو _.');
+
+      const { data, error } = await db.auth.signUp({
         email,
         password,
         options: {
-          data: { display_name: name },
+          data: { username, display_name },
           emailRedirectTo: location.origin + location.pathname
         }
       });
 
-      if (result.error) throw result.error;
+      if (error) throw error;
 
-      if (!result.data.session) {
-        message(
-          "authMessage",
-          "تم إنشاء طلب الحساب. افتح بريدك الإلكتروني وأكد حسابك ثم سجّل الدخول.",
-          "success"
-        );
+      if (data.session && data.user) {
+        user = data.user;
+        await startApp();
       } else {
-        await enterHome(result.data.user);
+        toast('تم إنشاء الحساب. أكّد بريدك الإلكتروني ثم سجّل الدخول.');
       }
-
     } else {
-      result = await client.auth.signInWithPassword({
+      const { data, error } = await db.auth.signInWithPassword({
         email, password
       });
 
-      if (result.error) throw result.error;
-      await enterHome(result.data.user);
+      if (error) throw error;
+
+      user = data.user;
+      await startApp();
     }
-
   } catch (error) {
-    message("authMessage", error.message || "تعذر إكمال العملية.", "error");
+    toast(errorText(error));
   } finally {
-    $("submitButton").disabled = false;
+    button.disabled = false;
   }
-});
+};
 
-async function resetPassword() {
-  const email = $("email").value.trim();
+async function loadMyProfile() {
+  const { data, error } = await db
+    .from('profiles')
+    .select('*')
+    .eq('user_id', user.id)
+    .maybeSingle();
 
-  if (!email) {
-    message("authMessage", "أدخل بريدك الإلكتروني أولًا.", "info");
+  if (error) throw error;
+
+  if (data) {
+    profile = data;
     return;
   }
 
+  const meta = user.user_metadata || {};
+  let username = String(
+    meta.username || user.email?.split('@')[0] || 'user' + user.id.slice(0,8)
+  ).toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,20);
+
+  if (username.length < 3) username = 'user' + user.id.slice(0,8);
+
+  const { data: created, error: createError } = await db
+    .from('profiles')
+    .insert({
+      user_id: user.id,
+      username,
+      display_name: meta.display_name || username,
+      bio: ''
+    })
+    .select()
+    .single();
+
+  if (createError) throw createError;
+  profile = created;
+}
+
+async function startApp() {
   try {
-    const client = await getDB();
+    if (!user) return showAuth();
 
-    const result = await client.auth.resetPasswordForEmail(email, {
-      redirectTo: location.origin + location.pathname
-    });
+    await loadMyProfile();
+    showMain();
+    renderMyProfile();
+    await loadPeople();
+    await startRealtime();
+    await updateLastSeen();
 
-    if (result.error) throw result.error;
-
-    message(
-      "authMessage",
-      "إذا كان البريد مسجلًا، فستصلك رسالة لاستعادة كلمة المرور.",
-      "success"
-    );
+    $('searchUsers').oninput = renderPeople;
   } catch (error) {
-    message("authMessage", error.message, "error");
+    console.error(error);
+    showAuth();
+    toast('تعذّر تحميل الحساب: ' + errorText(error));
   }
 }
 
-/* التنقل بين أقسام الصفحة الرئيسية */
+function renderMyProfile() {
+  $('myAvatar').innerHTML = profile.avatar_url
+    ? `<img src="${esc(profile.avatar_url)}" alt="">`
+    : initial(profile);
 
-function showSection(id) {
-  [
-    "profileSection",
-    "findSection",
-    "inboxSection",
-    "chatSection",
-    "backgroundSection"
-  ].forEach(section => {
-    $(section).hidden = section !== id;
+  $('myName').textContent = profile.display_name || profile.username;
+  $('myUsername').textContent = '@' + profile.username;
+}
+
+async function loadPeople() {
+  const { data, error } = await db
+    .from('profiles')
+    .select('user_id,username,display_name,avatar_url,bio,last_seen')
+    .neq('user_id', user.id)
+    .order('display_name', { ascending:true })
+    .limit(500);
+
+  if (error) throw error;
+
+  people = data || [];
+  renderPeople();
+}
+
+function lastMessage(id) {
+  return messages
+    .filter(m =>
+      (m.sender_id === id && m.recipient_id === user.id) ||
+      (m.sender_id === user.id && m.recipient_id === id)
+    )
+    .sort((a,b) => new Date(b.created_at) - new Date(a.created_at))[0];
+}
+
+function renderPeople() {
+  const query = $('searchUsers').value.trim().replace(/^@/,'').toLowerCase();
+
+  const list = people.filter(p =>
+    !query ||
+    (p.username || '').toLowerCase().includes(query) ||
+    (p.display_name || '').toLowerCase().includes(query)
+  );
+
+  list.sort((a,b) => {
+    const ma = lastMessage(a.user_id);
+    const mb = lastMessage(b.user_id);
+
+    if (ma && mb) return new Date(mb.created_at) - new Date(ma.created_at);
+    if (ma) return -1;
+    if (mb) return 1;
+
+    return Number(onlineNow(b.user_id)) - Number(onlineNow(a.user_id));
   });
 
-  if (id === "inboxSection") loadConversations();
+  const container = $('userList');
 
-  window.scrollTo(0, 0);
+  if (!list.length) {
+    container.innerHTML = '<div class="empty">لا يوجد مستخدمون مطابقون.</div>';
+    return;
+  }
+
+  container.innerHTML = list.map(p => {
+    const m = lastMessage(p.user_id);
+    const preview = m
+      ? (m.image_url ? '📷 صورة' : (m.sender_id === user.id ? 'أنت: ' : '') + (m.body || ''))
+      : (onlineNow(p.user_id) ? 'متصل الآن' : '@' + p.username);
+
+    return `
+      <div class="user ${active?.user_id === p.user_id ? 'active' : ''}"
+           data-id="${esc(p.user_id)}">
+        ${avatarHTML(p)}
+        <div class="userinfo">
+          <strong><i class="dot ${onlineNow(p.user_id) ? 'online' : ''}"></i>${esc(p.display_name || p.username)}</strong>
+          <span>${esc(preview)}</span>
+        </div>
+        ${m ? `<span class="small muted">${timeText(m.created_at)}</span>` : ''}
+      </div>`;
+  }).join('');
+
+  container.querySelectorAll('.user').forEach(element => {
+    element.onclick = () => openChat(element.dataset.id);
+  });
 }
 
-/* فتح الصفحة الرئيسية */
+function renderChatHead() {
+  if (!active) return;
 
-async function enterHome(user) {
-  currentUser = user;
+  $('chatHead').innerHTML = `
+    ${avatarHTML(active)}
+    <div class="chatheadtext">
+      <strong>${esc(active.display_name || active.username)}</strong>
+      <span>${onlineNow(active.user_id)
+        ? '<i class="dot online"></i>متصل الآن'
+        : esc(lastSeen(active))}
+        ${active.bio ? ' · ' + esc(active.bio) : ''}
+      </span>
+    </div>
+    <button class="icon mobileback" id="backUsers" aria-label="العودة للقائمة">☰</button>`;
 
-  $("authView").hidden = true;
-  $("homeView").hidden = false;
-  $("userEmail").textContent = user.email || "";
-
-  showSection("profileSection");
-
-  await loadProfile();
-  await loadSavedBackground();
-}
-
-/* إنشاء يوزر واحد لكل حساب */
-
-async function loadProfile() {
-  if (!currentUser) return;
-
-  $("profileStatus").textContent = "جارٍ تحميل الملف الشخصي...";
-  $("usernameSetup").hidden = true;
-  $("myUsernameArea").hidden = true;
-
-  try {
-    const client = await getDB();
-
-    const { data, error } = await client
-      .from("profiles")
-      .select("user_id, username")
-      .eq("user_id", currentUser.id)
-      .maybeSingle();
-
-    if (error) throw error;
-
-    if (data) {
-      myProfile = data;
-
-      $("profileStatus").textContent = "تم إعداد ملفك الشخصي.";
-      $("myUsername").textContent = "@" + data.username;
-      $("myUsernameArea").hidden = false;
-
-    } else {
-      myProfile = null;
-      $("profileStatus").textContent = "اختر يوزرك قبل بدء الدردشة.";
-      $("usernameSetup").hidden = false;
+  $('backUsers').onclick = () => {
+    if (innerWidth <= 760) {
+      active = null;
+      stopTypingChannel();
+      $('chatPanel').classList.add('notselected');
     }
-
-  } catch (error) {
-    $("profileStatus").textContent = "تعذر تحميل الملف الشخصي.";
-    message("profileMessage", error.message, "error");
-  }
+  };
 }
 
-async function createUsername() {
-  const username = $("usernameInput").value.trim().toLowerCase();
+async function openChat(id) {
+  active = people.find(p => p.user_id === id);
+  if (!active) return;
 
-  if (!/^[a-z0-9_]{3,20}$/.test(username)) {
-    message(
-      "profileMessage",
-      "اليوزر يجب أن يحتوي على 3–20 رمزًا من الأحرف الإنجليزية الصغيرة أو الأرقام أو _",
-      "error"
-    );
-    return;
-  }
+  $('chatPanel').classList.remove('notselected');
+  renderPeople();
+  renderChatHead();
 
-  try {
-    const client = await getDB();
-
-    const { data, error } = await client
-      .from("profiles")
-      .insert({
-        user_id: currentUser.id,
-        username
-      })
-      .select("user_id, username")
-      .single();
-
-    if (error) {
-      if (error.code === "23505") {
-        throw new Error("هذا اليوزر مستخدم بالفعل. اختر يوزرًا آخر.");
-      }
-      throw error;
-    }
-
-    myProfile = data;
-
-    $("usernameSetup").hidden = true;
-    $("myUsername").textContent = "@" + data.username;
-    $("myUsernameArea").hidden = false;
-    $("profileStatus").textContent = "تم إنشاء يوزرك بنجاح.";
-
-    message("profileMessage", "أصبح لديك يوزر خاص وفريد!", "success");
-
-  } catch (error) {
-    message("profileMessage", error.message, "error");
-  }
-}
-
-/* البحث عن مستخدم باليوزر */
-
-async function findUser() {
-  const username = $("searchUsername").value.trim().toLowerCase();
-
-  $("searchResult").replaceChildren();
-
-  if (!/^[a-z0-9_]{3,20}$/.test(username)) {
-    message("searchMessage", "اكتب يوزرًا صحيحًا.", "error");
-    return;
-  }
-
-  if (!myProfile) {
-    message("searchMessage", "أنشئ يوزرك أولًا من ملفي الشخصي.", "error");
-    return;
-  }
-
-  if (username === myProfile.username) {
-    message("searchMessage", "هذا يوزرك أنت! اكتب يوزر شخص آخر.", "info");
-    return;
-  }
-
-  try {
-    const client = await getDB();
-
-    const { data, error } = await client
-      .from("profiles")
-      .select("user_id, username")
-      .eq("username", username)
-      .maybeSingle();
-
-    if (error) throw error;
-
-    if (!data) {
-      message("searchMessage", "لم نجد مستخدمًا بهذا اليوزر.", "error");
-      return;
-    }
-
-    message("searchMessage", "تم العثور على المستخدم.", "success");
-
-    const card = document.createElement("div");
-    card.className = "chatItem";
-
-    const title = document.createElement("strong");
-    title.textContent = "@" + data.username;
-
-    const btn = document.createElement("button");
-    btn.className = "primary wide";
-    btn.textContent = "فتح المحادثة";
-    btn.onclick = () => openChat(data);
-
-    card.append(title, btn);
-    $("searchResult").append(card);
-
-  } catch (error) {
-    message("searchMessage", error.message, "error");
-  }
-}
-
-/* فتح محادثة */
-
-async function openChat(profile) {
-  if (!myProfile) {
-    message("searchMessage", "أنشئ يوزرك أولًا.", "error");
-    return;
-  }
-
-  if (profile.user_id === currentUser.id) return;
-
-  activeChat = profile;
-
-  $("chatTitle").textContent = "محادثة خاصة";
-  $("chatUsername").textContent = "@" + profile.username;
-
-  showSection("chatSection");
+  $('messageInput').disabled = false;
+  $('send').disabled = false;
 
   await loadMessages();
-
-  if (refreshTimer) clearInterval(refreshTimer);
-
-  refreshTimer = setInterval(() => {
-    if (activeChat) loadMessages(true);
-  }, 3000);
+  await joinTypingChannel();
 }
 
-function closeChat() {
-  activeChat = null;
+async function loadMessages() {
+  if (!active) return;
 
-  if (refreshTimer) {
-    clearInterval(refreshTimer);
-    refreshTimer = null;
+  const other = active.user_id;
+  const filter =
+    `or(and(sender_id.eq.${user.id},recipient_id.eq.${other}),` +
+    `and(sender_id.eq.${other},recipient_id.eq.${user.id}))`;
+
+  const { data, error } = await db
+    .from('messages')
+    .select('id,sender_id,recipient_id,body,image_url,created_at')
+    .or(filter)
+    .order('created_at', { ascending:true })
+    .limit(300);
+
+  if (error) {
+    console.error(error);
+    toast('تعذّر تحميل الرسائل. راجع إعدادات قاعدة البيانات.');
+    return;
   }
 
-  showSection("inboxSection");
+  messages = messages.filter(m =>
+    !((m.sender_id === other && m.recipient_id === user.id) ||
+      (m.sender_id === user.id && m.recipient_id === other))
+  ).concat(data || []);
+
+  renderMessages();
+  renderPeople();
 }
 
-/* قراءة الرسائل */
+function renderMessages() {
+  const box = $('messages');
 
-async function loadMessages(silent = false) {
-  if (!activeChat || !currentUser) return;
-
-  try {
-    const client = await getDB();
-
-    const { data, error } = await client
-      .from("messages")
-      .select("id, sender_id, recipient_id, body, created_at")
-      .or(
-        "and(sender_id.eq." + currentUser.id +
-        ",recipient_id.eq." + activeChat.user_id +
-        "),and(sender_id.eq." + activeChat.user_id +
-        ",recipient_id.eq." + currentUser.id + ")"
-      )
-      .order("created_at", { ascending: true })
-      .limit(200);
-
-    if (error) throw error;
-
-    const box = $("chatMessages");
-    const previousCount = box.dataset.count || "";
-
-    if (previousCount === String(data.length) && silent) return;
-
-    box.replaceChildren();
-
-    data.forEach(item => {
-      const bubble = document.createElement("div");
-
-      bubble.className = "bubble " +
-        (item.sender_id === currentUser.id ? "mine" : "theirs");
-
-      const body = document.createElement("div");
-      body.textContent = item.body;
-
-      const time = document.createElement("time");
-      time.textContent = new Date(item.created_at).toLocaleString("ar");
-
-      bubble.append(body, time);
-      box.append(bubble);
-    });
-
-    box.dataset.count = String(data.length);
-    box.scrollTop = box.scrollHeight;
-
-    clearMessage("chatMessage");
-
-  } catch (error) {
-    if (!silent) {
-      message("chatMessage", "تعذر تحميل الرسائل: " + error.message, "error");
-    }
+  if (!active) {
+    box.innerHTML = '<div class="empty">اختر شخصًا لبدء المحادثة.</div>';
+    return;
   }
+
+  const rows = messages.filter(m =>
+    (m.sender_id === user.id && m.recipient_id === active.user_id) ||
+    (m.sender_id === active.user_id && m.recipient_id === user.id)
+  ).sort((a,b) => new Date(a.created_at) - new Date(b.created_at));
+
+  if (!rows.length) {
+    box.innerHTML = '<div class="empty">💬<br>لا توجد رسائل بعد. ابدأ المحادثة!</div>';
+    return;
+  }
+
+  box.innerHTML = rows.map(m => `
+    <div class="bubble ${m.sender_id === user.id ? 'mine' : ''}">
+      ${m.image_url
+        ? `<a href="${esc(m.image_url)}" target="_blank" rel="noopener">
+             <img src="${esc(m.image_url)}" alt="صورة مرسلة" loading="lazy">
+           </a>`
+        : ''}
+      ${m.body && m.body !== '📷 صورة'
+        ? `<div>${esc(m.body).replace(/\n/g,'<br>')}</div>`
+        : ''}
+      <div class="bubbletime">${timeText(m.created_at)}</div>
+    </div>
+  `).join('');
+
+  box.scrollTop = box.scrollHeight;
 }
 
-/* إرسال الرسائل */
+async function sendMessage(body, image_url = null) {
+  if (!active) throw new Error('اختر محادثة أولًا.');
 
-$("sendForm").addEventListener("submit", async event => {
+  const { data, error } = await db
+    .from('messages')
+    .insert({
+      sender_id: user.id,
+      recipient_id: active.user_id,
+      body: body || '📷 صورة',
+      image_url
+    })
+    .select('id,sender_id,recipient_id,body,image_url,created_at')
+    .single();
+
+  if (error) throw error;
+
+  if (!messages.some(m => String(m.id) === String(data.id))) {
+    messages.push(data);
+  }
+
+  renderMessages();
+  renderPeople();
+}
+
+$('messageForm').onsubmit = async event => {
   event.preventDefault();
 
-  if (!activeChat || !myProfile) return;
+  const body = $('messageInput').value.trim();
+  if (!body || !active) return;
 
-  const body = $("messageInput").value.trim();
-
-  if (!body) return;
-
-  $("sendButton").disabled = true;
+  $('send').disabled = true;
 
   try {
-    const client = await getDB();
-
-    const { error } = await client.from("messages").insert({
-      sender_id: currentUser.id,
-      recipient_id: activeChat.user_id,
-      body
-    });
-
-    if (error) throw error;
-
-    $("messageInput").value = "";
-    await loadMessages();
-
+    await sendMessage(body);
+    $('messageInput').value = '';
+    $('messageInput').style.height = 'auto';
+    sendTyping(false);
   } catch (error) {
-    message("chatMessage", "تعذر إرسال الرسالة: " + error.message, "error");
+    toast(errorText(error));
   } finally {
-    $("sendButton").disabled = false;
+    $('send').disabled = !active;
   }
-});
+};
 
-/* قائمة المحادثات */
+$('messageInput').oninput = () => {
+  const input = $('messageInput');
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight,130) + 'px';
 
-async function loadConversations() {
-  if (!currentUser) return;
+  sendTyping(true);
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(() => sendTyping(false), 1800);
+};
 
-  const list = $("conversationList");
-  list.replaceChildren();
+function validImage(file) {
+  const types = ['image/jpeg','image/png','image/webp'];
 
-  try {
-    const client = await getDB();
+  if (!types.includes(file.type)) {
+    toast('اختر صورة PNG أو JPG أو WEBP.');
+    return false;
+  }
 
-    const { data, error } = await client
-      .from("messages")
-      .select("sender_id, recipient_id, body, created_at")
-      .or(
-        "sender_id.eq." + currentUser.id +
-        ",recipient_id.eq." + currentUser.id
-      )
-      .order("created_at", { ascending: false })
-      .limit(300);
+  if (file.size > 5 * 1024 * 1024) {
+    toast('حجم الصورة يجب ألا يتجاوز 5 ميغابايت.');
+    return false;
+  }
 
-    if (error) throw error;
+  return true;
+}
 
-    const uniqueIds = [];
+async function uploadImage(file, folder) {
+  const extension = ({
+    'image/jpeg':'jpg',
+    'image/png':'png',
+    'image/webp':'webp'
+  })[file.type];
 
-    data.forEach(item => {
-      const otherId = item.sender_id === currentUser.id
-        ? item.recipient_id
-        : item.sender_id;
+  const path = `${user.id}/${folder}-${Date.now()}-${Math.random().toString(36).slice(2,8)}.${extension}`;
 
-      if (!uniqueIds.includes(otherId)) uniqueIds.push(otherId);
+  const { error } = await db.storage
+    .from(BUCKET)
+    .upload(path, file, {
+      contentType:file.type,
+      cacheControl:'3600',
+      upsert:false
     });
 
-    if (!uniqueIds.length) {
-      message("inboxMessage", "لا توجد محادثات بعد. ابحث عن يوزر لبدء دردشة.", "info");
-      return;
-    }
+  if (error) throw error;
 
-    clearMessage("inboxMessage");
-
-    const { data: profiles, error: profileError } = await client
-      .from("profiles")
-      .select("user_id, username")
-      .in("user_id", uniqueIds);
-
-    if (profileError) throw profileError;
-
-    const profileMap = new Map(
-      profiles.map(profile => [profile.user_id, profile])
-    );
-
-    uniqueIds.forEach(id => {
-      const profile = profileMap.get(id);
-      if (!profile) return;
-
-      const latest = data.find(item =>
-        item.sender_id === id || item.recipient_id === id
-      );
-
-      const button = document.createElement("button");
-      button.className = "chatItem";
-
-      const title = document.createElement("strong");
-      title.textContent = "@" + profile.username;
-
-      const preview = document.createElement("small");
-      preview.textContent = latest ? latest.body : "افتح المحادثة";
-
-      button.append(title, preview);
-      button.onclick = () => openChat(profile);
-
-      list.append(button);
-    });
-
-  } catch (error) {
-    message("inboxMessage", "تعذر تحميل المحادثات: " + error.message, "error");
-  }
+  const { data } = db.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
 }
 
-/* التخزين المحلي للخلفية */
+$('attach').onclick = () => {
+  if (!active) return toast('اختر شخصًا أولًا.');
+  $('imageInput').click();
+};
 
-function openImageDB() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open("ATHAR_CHAT_SETTINGS", 1);
+$('imageInput').onchange = async event => {
+  const file = event.target.files?.[0];
+  event.target.value = '';
 
-    request.onupgradeneeded = () => {
-      const database = request.result;
+  if (!file || !validImage(file)) return;
 
-      if (!database.objectStoreNames.contains("settings")) {
-        database.createObjectStore("settings");
-      }
-    };
+  $('attach').disabled = true;
 
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
-  });
-}
-
-async function saveImage(data) {
-  const database = await openImageDB();
-
-  return new Promise((resolve, reject) => {
-    const tx = database.transaction("settings", "readwrite");
-
-    tx.objectStore("settings").put(data, "homeBackground");
-
-    tx.oncomplete = () => {
-      database.close();
-      resolve();
-    };
-
-    tx.onerror = () => {
-      database.close();
-      reject(tx.error);
-    };
-  });
-}
-
-async function readImage() {
-  const database = await openImageDB();
-
-  return new Promise((resolve, reject) => {
-    const tx = database.transaction("settings", "readonly");
-    const request = tx.objectStore("settings").get("homeBackground");
-
-    request.onsuccess = () => {
-      const data = request.result || null;
-      database.close();
-      resolve(data);
-    };
-
-    request.onerror = () => {
-      database.close();
-      reject(request.error);
-    };
-  });
-}
-
-async function loadSavedBackground() {
   try {
-    const data = await readImage();
-
-    $("homeView").style.backgroundImage = data
-      ? 'linear-gradient(#09090935,#09090955),url("' + data + '")'
-      : "none";
+    toast('جارٍ رفع الصورة...');
+    const url = await uploadImage(file, 'chat');
+    await sendMessage('📷 صورة', url);
+    toast('تم إرسال الصورة.');
   } catch (error) {
-    console.warn(error);
+    toast('تعذّر إرسال الصورة: ' + errorText(error));
+  } finally {
+    $('attach').disabled = false;
   }
+};
+
+/* الملف الشخصي */
+function openProfile() {
+  if (!profile) return;
+
+  $('profileName').value = profile.display_name || '';
+  $('profileBio').value = profile.bio || '';
+  $('profileUsername').value = profile.username || '';
+
+  $('previewAvatar').innerHTML = profile.avatar_url
+    ? `<img src="${esc(profile.avatar_url)}" alt="">`
+    : initial(profile);
+
+  chosenAvatar = null;
+  $('avatarInput').value = '';
+  $('profileModal').classList.remove('hidden');
 }
 
-$("backgroundFile").addEventListener("change", event => {
-  const file = event.target.files[0];
+$('editProfile').onclick = openProfile;
+$('editTop').onclick = openProfile;
+$('closeProfile').onclick = () => $('profileModal').classList.add('hidden');
 
+$('profileModal').onclick = event => {
+  if (event.target === $('profileModal'))
+    $('profileModal').classList.add('hidden');
+};
+
+$('chooseAvatar').onclick = () => $('avatarInput').click();
+
+$('avatarInput').onchange = event => {
+  const file = event.target.files?.[0];
   if (!file) return;
 
-  if (!file.type.startsWith("image/")) {
-    message("backgroundMessage", "اختر صورة صالحة.", "error");
+  if (!validImage(file)) {
+    event.target.value = '';
     return;
   }
 
-  if (file.size > 15 * 1024 * 1024) {
-    message("backgroundMessage", "حجم الصورة أكبر من 15 ميجابايت.", "error");
-    return;
-  }
+  chosenAvatar = file;
+  $('previewAvatar').innerHTML =
+    `<img src="${URL.createObjectURL(file)}" alt="">`;
+};
 
-  const reader = new FileReader();
+$('saveProfile').onclick = async () => {
+  const button = $('saveProfile');
+  button.disabled = true;
 
-  reader.onload = () => {
-    const img = new Image();
+  try {
+    const display_name = $('profileName').value.trim();
+    const bio = $('profileBio').value.trim();
 
-    img.onload = () => {
-      const scale = Math.min(1, 1600 / img.width, 1600 / img.height);
-      const canvas = document.createElement("canvas");
+    if (!display_name) throw new Error('اكتب الاسم الظاهر.');
 
-      canvas.width = Math.round(img.width * scale);
-      canvas.height = Math.round(img.height * scale);
-
-      canvas.getContext("2d").drawImage(
-        img, 0, 0, canvas.width, canvas.height
-      );
-
-      previewData = canvas.toDataURL("image/jpeg", 0.82);
-
-      $("backgroundPreview").src = previewData;
-      $("backgroundPreview").hidden = false;
-      $("backgroundActions").hidden = false;
-
-      message("backgroundMessage", "عاين الصورة ثم اضغط تطبيق الخلفية.", "info");
+    const patch = {
+      display_name,
+      bio,
+      last_seen:new Date().toISOString()
     };
 
-    img.onerror = () => {
-      message("backgroundMessage", "تعذر فتح الصورة.", "error");
-    };
+    if (chosenAvatar)
+      patch.avatar_url = await uploadImage(chosenAvatar,'avatar');
 
-    img.src = reader.result;
-  };
-
-  reader.readAsDataURL(file);
-});
-
-async function applyBackground() {
-  if (!previewData) return;
-
-  try {
-    await saveImage(previewData);
-
-    $("homeView").style.backgroundImage =
-      'linear-gradient(#09090935,#09090955),url("' +
-      previewData + '")';
-
-    cancelPreview();
-
-    message("backgroundMessage", "تم حفظ الخلفية.", "success");
-  } catch (error) {
-    message("backgroundMessage", "تعذر حفظ الصورة. جرّب صورة أصغر.", "error");
-  }
-}
-
-function cancelPreview() {
-  previewData = null;
-  $("backgroundFile").value = "";
-  $("backgroundPreview").hidden = true;
-  $("backgroundPreview").removeAttribute("src");
-  $("backgroundActions").hidden = true;
-}
-
-async function resetBackground() {
-  try {
-    const database = await openImageDB();
-
-    await new Promise((resolve, reject) => {
-      const tx = database.transaction("settings", "readwrite");
-
-      tx.objectStore("settings").delete("homeBackground");
-
-      tx.oncomplete = resolve;
-      tx.onerror = () => reject(tx.error);
-    });
-
-    database.close();
-
-    $("homeView").style.backgroundImage = "none";
-    cancelPreview();
-
-    message("backgroundMessage", "تمت استعادة الخلفية الأصلية.", "success");
-  } catch (error) {
-    message("backgroundMessage", "تعذر استعادة الخلفية.", "error");
-  }
-}
-
-/* تسجيل الخروج */
-
-async function logout() {
-  try {
-    const client = await getDB();
-    const { error } = await client.auth.signOut();
+    const { error } = await db
+      .from('profiles')
+      .update(patch)
+      .eq('user_id',user.id);
 
     if (error) throw error;
 
-    currentUser = null;
-    myProfile = null;
-    activeChat = null;
+    profile = {...profile,...patch};
 
-    if (refreshTimer) clearInterval(refreshTimer);
+    $('profileModal').classList.add('hidden');
+    renderMyProfile();
 
-    $("homeView").hidden = true;
-    $("authView").hidden = false;
+    const index = people.findIndex(p => p.user_id === user.id);
+    if (index !== -1) people[index] = {...people[index],...patch};
 
-    setMode("login");
-    message("authMessage", "تم تسجيل الخروج.", "success");
-
-  } catch (error) {
-    alert("تعذر تسجيل الخروج. تحقق من الإنترنت وحاول مجددًا.");
-  }
-}
-
-/* تشغيل الموقع واستعادة الجلسة */
-
-async function initialize() {
-  setMode("login");
-
-  try {
-    const client = await getDB();
-    const { data, error } = await client.auth.getSession();
-
-    if (error) throw error;
-
-    if (data.session && data.session.user) {
-      await enterHome(data.session.user);
+    if (active) {
+      const updated = people.find(p => p.user_id === active.user_id);
+      if (updated) active = updated;
     }
 
-    client.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_OUT") {
-        currentUser = null;
-        myProfile = null;
-        $("homeView").hidden = true;
-        $("authView").hidden = false;
-      }
-    });
-
+    renderPeople();
+    renderChatHead();
+    toast('تم حفظ الملف الشخصي.');
   } catch (error) {
-    message(
-      "authMessage",
-      "تعذر الاتصال بالخادم. تحقق من الإنترنت وإعدادات Supabase.",
-      "error"
-    );
+    toast(errorText(error));
+  } finally {
+    button.disabled = false;
   }
+};
+
+/* الظهور وآخر ظهور */
+async function updateLastSeen() {
+  if (!user) return;
+
+  const stamp = new Date().toISOString();
+
+  const { error } = await db
+    .from('profiles')
+    .update({last_seen:stamp})
+    .eq('user_id',user.id);
+
+  if (error) console.warn('تعذّر تحديث آخر ظهور:',error.message);
+  if (profile) profile.last_seen = stamp;
 }
 
-initialize();
+async function startRealtime() {
+  if (presence) db.removeChannel(presence);
+  if (realtime) db.removeChannel(realtime);
+
+  presence = db.channel('athar-presence', {
+    config:{presence:{key:user.id}}
+  });
+
+  presence.on('presence',{event:'sync'},() => {
+    const state = presence.presenceState();
+    online = new Set(Object.keys(state));
+
+    renderPeople();
+    renderChatHead();
+  });
+
+  presence.subscribe(async status => {
+    if (status === 'SUBSCRIBED') {
+      await presence.track({
+        user_id:user.id,
+        username:profile.username,
+        online_at:new Date().toISOString()
+      });
+    }
+  });
+
+  realtime = db.channel('athar-messages-' + user.id);
+
+  realtime.on(
+    'postgres_changes',
+    {event:'INSERT',schema:'public',table:'messages'},
+    payload => {
+      const message = payload.new;
+
+      if (!message) return;
+      if (message.sender_id !== user.id &&
+          message.recipient_id !== user.id) return;
+
+      if (messages.some(m => String(m.id) === String(message.id))) return;
+
+      const belongsToActive = active && (
+        (message.sender_id === active.user_id && message.recipient_id === user.id) ||
+        (message.sender_id === user.id && message.recipient_id === active.user_id)
+      );
+
+      if (belongsToActive) {
+        messages.push(message);
+        renderMessages();
+      } else if (message.sender_id !== user.id) {
+        toast('وصلتك رسالة جديدة.');
+      }
+
+      renderPeople();
+    }
+  );
+
+  realtime.subscribe();
+}
+
+async function startTypingChannel() {
+  stopTypingChannel();
+  if (!active) return;
+
+  const ids = [user.id,active.user_id].sort();
+
+  typingChannel = db.channel('athar-typing-' + ids.join('-'));
+
+  typingChannel.on('broadcast',{event:'typing'},({payload}) => {
+    if (payload?.user_id !== active?.user_id) return;
+
+    $('typingLine').textContent = payload.typing
+      ? `${active.display_name || active.username} يكتب الآن...`
+      : '';
+  });
+
+  typingChannel.subscribe();
+}
+
+function stopTypingChannel() {
+  if (typingChannel) db.removeChannel(typingChannel);
+  typingChannel = null;
+  $('typingLine').textContent = '';
+}
+
+async function sendTyping(typing) {
+  if (!typingChannel) return;
+
+  try {
+    await typingChannel.send({
+      type:'broadcast',
+      event:'typing',
+      payload:{user_id:user.id,typing}
+    });
+  } catch {}
+}
+
+$('logout').onclick = async () => {
+  try {
+    await updateLastSeen();
+    if (presence) await presence.untrack();
+    stopTypingChannel();
+
+    if (realtime) db.removeChannel(realtime);
+    if (presence) db.removeChannel(presence);
+
+    await db.auth.signOut();
+
+    user = null;
+    profile = null;
+    active = null;
+    messages = [];
+    online.clear();
+
+    showAuth();
+    toast('تم تسجيل الخروج.');
+  } catch (error) {
+    toast(errorText(error));
+  }
+};
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) updateLastSeen();
+});
+
+window.addEventListener('pagehide', () => {
+  if (presence) presence.untrack();
+});
+
+db.auth.onAuthStateChange((event, session) => {
+  if (session?.user && (!user || user.id !== session.user.id)) {
+    user = session.user;
+    setTimeout(() => startApp(),0);
+  }
+
+  if (event === 'SIGNED_OUT') {
+    user = null;
+    profile = null;
+    showAuth();
+  }
+});
+
+(async () => {
+  try {
+    const {data,error} = await db.auth.getSession();
+
+    if (error) throw error;
+
+    if (data.session?.user) {
+      user = data.session.user;
+      await startApp();
+    } else {
+      showAuth();
+    }
+  } catch (error) {
+    console.error(error);
+    showAuth();
+    toast(errorText(error));
+  }
+})();
+})();
 </script>
 </body>
-  </html>
+          </html>
